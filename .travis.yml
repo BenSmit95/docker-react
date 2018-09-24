@@ -9,3 +9,16 @@ before_install:
 # all the commands that need to be run
 script: 
   - docker run cyclopspirate/docker-react npm run test -- --coverage
+
+deploy:
+  provider: elasticbeanstalk # hosting provider - some are pre configured
+  region: "eu-west-2" #region 
+  app: "docker-react" # name of the app
+  env: "DockerReact-env" # The actual running environment
+  bucket_name: "elasticbeanstalk-eu-west-2-525684907493" 
+  bucket_path: "docker-react" # where to install this bucket
+  on:
+    branch: master # only deploy when pushed to master branch
+  access_key_id: $AWS_ACCESS_KEY # environment variables
+  secret_access_key:
+    secure: "$AWS_SECRET_KEY"
