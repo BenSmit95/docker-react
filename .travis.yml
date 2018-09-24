@@ -1,0 +1,11 @@
+sudo: required
+services:
+  - docker
+
+# Build the docker image first
+before_install:
+  - docker build -t cyclopspirate/docker-react -f Dockerfile.dev .
+
+# all the commands that need to be run
+script: 
+  - docker run cyclopspirate/docker-react npm run test -- --coverage
